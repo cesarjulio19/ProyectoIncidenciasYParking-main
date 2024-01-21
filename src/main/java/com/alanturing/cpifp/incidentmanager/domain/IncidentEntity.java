@@ -1,9 +1,9 @@
 package com.alanturing.cpifp.incidentmanager.domain;
 
-public class Incident {
+public class IncidentEntity {
     private int id;
     private String description;
-    public Incident(int id, String description) {
+    public IncidentEntity(int id, String description) {
         this.id = id;
         this.description = description;
     }

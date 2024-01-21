@@ -2,9 +2,9 @@ package com.alanturing.cpifp.incidentmanager.service;
 
 import java.util.List;
 
-import com.alanturing.cpifp.incidentmanager.domain.Incident;
+import com.alanturing.cpifp.incidentmanager.domain.IncidentEntity;
 
 public interface IncidentService {
     
-    public List<Incident> getAll();
+    public List<IncidentEntity> getAll();
 }

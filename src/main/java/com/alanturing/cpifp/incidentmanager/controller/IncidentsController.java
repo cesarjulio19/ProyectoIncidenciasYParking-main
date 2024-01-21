@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alanturing.cpifp.incidentmanager.domain.Incident;
+import com.alanturing.cpifp.incidentmanager.domain.IncidentEntity;
 import com.alanturing.cpifp.incidentmanager.service.IncidentService;
 
 @RestController
@@ -20,7 +20,7 @@ public class IncidentsController {
 
 
     @GetMapping("incidents")
-    public List<Incident> getAllIncidents() {
+    public List<IncidentEntity> getAllIncidents() {
 
         return service.getAll();
     }

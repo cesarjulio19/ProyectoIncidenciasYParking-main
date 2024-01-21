@@ -5,16 +5,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.alanturing.cpifp.incidentmanager.domain.Incident;
+import com.alanturing.cpifp.incidentmanager.domain.IncidentEntity;
 
 @Service
 public class IncidentServiceImpl implements IncidentService {
 
     @Override
-    public List<Incident> getAll() {
-        List<Incident> incidents = new ArrayList<>();
-        incidents.add(new Incident(1, "Pomo Roto"));
-        incidents.add(new Incident(2, "Internet infernal"));
+    public List<IncidentEntity> getAll() {
+        List<IncidentEntity> incidents = new ArrayList<>();
+        incidents.add(new IncidentEntity(1, "Pomo Roto"));
+        incidents.add(new IncidentEntity(2, "Internet infernal"));
 
         return  incidents;
     }
