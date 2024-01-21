@@ -30,7 +30,7 @@ public class IncidentsController {
     }
 
     @GetMapping("api/incident")
-    public String addNewIncident(@RequestParam String title,
+    public @ResponseBody String addNewIncident(@RequestParam String title,
      @RequestParam String description, @RequestParam String file){
 
         service.addNewIncident(title, description, file);
@@ -38,7 +38,4 @@ public class IncidentsController {
         return "Saved";
 
     }
-   
-    
-
 }
