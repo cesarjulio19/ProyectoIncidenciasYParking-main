@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "Incident")
+@Entity(name = "incident")
 public class IncidentEntity {
 
     @Id

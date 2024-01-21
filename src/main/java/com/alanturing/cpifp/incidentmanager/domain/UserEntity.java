@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "User")
+@Entity(name = "user")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -61,10 +61,6 @@ public class UserEntity {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-
-
-
-    
+    } 
 }
 
