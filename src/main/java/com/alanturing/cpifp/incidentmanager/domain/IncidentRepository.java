@@ -1,5 +1,7 @@
 package com.alanturing.cpifp.incidentmanager.domain;
 
-public interface IncidentRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface IncidentRepository extends CrudRepository<IncidentEntity, Integer>{
     
 }
