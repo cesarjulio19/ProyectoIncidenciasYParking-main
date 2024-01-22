@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "vehicle")
+@Entity(name = "vehicles")
 public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +13,11 @@ public class VehicleEntity {
     private String model;
     private String color;
     private String licensePlate;
+    public VehicleEntity(String model, String color, String licensePlate) {
+        this.model = model;
+        this.color = color;
+        this.licensePlate = licensePlate;
+    }
     public int getIdV() {
         return idV;
     }

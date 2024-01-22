@@ -2,7 +2,6 @@ package com.alanturing.cpifp.incidentmanager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alanturing.cpifp.incidentmanager.domain.VehicleEntity;
 import com.alanturing.cpifp.incidentmanager.domain.VehicleRepository;
@@ -19,11 +18,8 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public String addVehicle(@RequestParam String model, @RequestParam String color, @RequestParam String licensePlate) {
-        VehicleEntity vehicle = new VehicleEntity();
-        vehicle.setColor(color);
-        vehicle.setModel(model);
-        vehicle.setLicensePlate(licensePlate);
+    public String addVehicle(String model, String color, String licensePlate) {
+        VehicleEntity vehicle = new VehicleEntity(model, color, licensePlate);
         repository.save(vehicle);
         return "Saved";
     }

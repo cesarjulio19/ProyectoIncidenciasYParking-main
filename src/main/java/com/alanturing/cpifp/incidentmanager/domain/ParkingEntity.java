@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "parking")
+@Entity(name = "parking-requests")
 public class ParkingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +15,10 @@ public class ParkingEntity {
     private LocalDate date;
     private boolean state;
 
+    public ParkingEntity(LocalDate date, boolean state) {
+        this.date = date;
+        this.state = state;
+    }
     public int getIdReq() {
         return IdReq;
     }

@@ -1,11 +1,9 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
 import com.alanturing.cpifp.incidentmanager.domain.UserRepository;
 
@@ -15,28 +13,34 @@ public class UserSrvicelmpl implements UserService{
   @Autowired 
   private UserRepository userRepository;
 
-    @Override
-    public Iterable<UserEntity> getAll() {
-        
-        return userRepository.findAll();
-        
+  @Override
+  public Iterable<UserEntity> getAll() {
+      return userRepository.findAll();
+  }
+
+  @Override
+  public String addNewUser(String name, String email, String surname,
+  String password, String address, int postalCode, String nif, String schoolYear) throws UserAlreadyExistsException {
+      
+    UserEntity n = new UserEntity(name, surname, nif, email, password, postalCode,
+    address, "User", schoolYear, false);
+    if (userRepository.existsByEmail(email)) {
+      throw new UserAlreadyExistsException();
     }
 
-    @Override
-    public String addNewUser(@RequestParam String name
-      , @RequestParam String email, @RequestParam String surname
-      , @RequestParam String password, @RequestParam LocalDate birthDate) {
-        
-      UserEntity n = new UserEntity();
-      n.setName(name);
-      n.setEmail(email);
-      n.setSurname(surname);
-      n.setBirthDate(birthDate);
-      n.setPassword(password);
-      n.setRol("User");
-      n.setParking(false);
-      userRepository.save(n);
-      return "Saved";
-    }
-    
+    userRepository.save(n);
+    return "Saved";
+  }
+
+  @Override
+  public void delete(int id) {
+    userRepository.deleteById(id);
+  }
+
+  @Override
+  public String updateUser(int id, UserEntity entity) {
+    UserEntity oldUser = userRepository.findById(id).orElseThrow();
+    userRepository.save(entity);
+    return "Updated";
+  }
 }

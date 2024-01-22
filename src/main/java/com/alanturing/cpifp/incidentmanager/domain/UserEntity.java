@@ -1,36 +1,51 @@
 package com.alanturing.cpifp.incidentmanager.domain;
 
-import java.time.LocalDate;
-
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "user")
+@Entity(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int idUsu;
     private String name;
     private String surname;
+    @Nonnull
+    @Column(unique = true)
+    private String nif;
+    @Nonnull
+    @Column(unique = true)
     private String email;
     private String password;
+    private int postalCode;
+    private String address;
     private String rol;
-    private LocalDate birthDate;
-    private boolean parking;
+    private String schoolYear;
+    private boolean parkingAccess;
 
-    public boolean isParking() {
-        return parking;
+    public UserEntity(String name, String surname, String nif, String email, String password, int postalCode,
+            String address, String rol, String schoolYear, boolean parkingAccess) {
+        this.name = name;
+        this.surname = surname;
+        this.nif = nif;
+        this.email = email;
+        this.password = password;
+        this.postalCode = postalCode;
+        this.address = address;
+        this.rol = rol;
+        this.schoolYear = schoolYear;
+        this.parkingAccess = parkingAccess;
     }
-    public void setParking(boolean parking) {
-        this.parking = parking;
+
+    public boolean hasParkingAccess() {
+        return parkingAccess;
     }
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setParkingAccess(boolean parkingAccess) {
+        this.parkingAccess = parkingAccess;
     }
     public String getRol() {
         return rol;
@@ -62,5 +77,29 @@ public class UserEntity {
     public void setEmail(String email) {
         this.email = email;
     } 
+    public String getNif() {
+        return nif;
+    }
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
+    public int getPostalCode() {
+        return postalCode;
+    }
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getSchoolYear() {
+        return schoolYear;
+    }
+    public void setSchoolYear(String schoolYear) {
+        this.schoolYear = schoolYear;
+    }
 }
 

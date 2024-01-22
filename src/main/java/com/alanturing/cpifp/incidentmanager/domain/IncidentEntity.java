@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "incident")
+@Entity(name = "incidents")
 public class IncidentEntity {
 
     @Id
@@ -18,6 +18,13 @@ public class IncidentEntity {
     private LocalDate date;
     private boolean state;
     private String file;
+    public IncidentEntity(String title, String description, LocalDate date, boolean state, String file) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.state = state;
+        this.file = file;
+    }
     public int getIdInc() {
         return idInc;
     }

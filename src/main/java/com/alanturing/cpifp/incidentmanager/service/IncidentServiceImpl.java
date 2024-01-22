@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.alanturing.cpifp.incidentmanager.domain.IncidentEntity;
 import com.alanturing.cpifp.incidentmanager.domain.IncidentRepository;
 
@@ -23,21 +21,11 @@ public class IncidentServiceImpl implements IncidentService {
     }
 
     @Override
-    public String addNewIncident(@RequestParam String title,
-     @RequestParam String description, @RequestParam String file ){
+    public String addNewIncident(String title, String description, String file ){
 
-        IncidentEntity n = new IncidentEntity();
-
-        n.setTitle(title);
-        n.setDescription(description);
-        n.setFile(file);
-        n.setState(false);
-        n.setDate(LocalDate.now());
+        IncidentEntity n = new IncidentEntity(title, description, LocalDate.now(), false, file);
         incidentRepository.save(n);
         return "Saved";
 
     }
-
-
-    
 }

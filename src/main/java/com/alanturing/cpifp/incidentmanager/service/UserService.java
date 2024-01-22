@@ -1,18 +1,16 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-
-import java.time.LocalDate;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
+
 public interface UserService {
 
     public Iterable<UserEntity> getAll();
 
-    public String addNewUser(@RequestParam String name
-      , @RequestParam String email, @RequestParam String surname
-      , @RequestParam String password, @RequestParam LocalDate birthDate  );
-    
+    public String addNewUser(String name, String email, String surname,
+    String password, String address, int postalCode, String nif, String schoolYear) throws UserAlreadyExistsException;
 
+    public void delete(int id);
+
+    public String updateUser(int id, UserEntity entity);
 }
