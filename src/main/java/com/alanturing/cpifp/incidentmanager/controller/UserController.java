@@ -23,7 +23,7 @@ public class UserController {
         this.service = service;
     }
 
-  @PostMapping("api/user") 
+  @PostMapping() 
     public @ResponseBody String addNewUser (@RequestParam String name
       , @RequestParam String email, @RequestParam String surname
       , @RequestParam String password, @RequestParam LocalDate birthDate ) {
@@ -33,7 +33,7 @@ public class UserController {
       return "Saved";
     }
 
-    @GetMapping("api/user")
+    @GetMapping()
     public @ResponseBody Iterable<UserEntity> getAllUsers() {
    
      return service.getAll();

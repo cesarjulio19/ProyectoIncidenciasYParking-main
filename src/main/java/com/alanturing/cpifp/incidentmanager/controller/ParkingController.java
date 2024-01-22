@@ -9,6 +9,7 @@ import com.alanturing.cpifp.incidentmanager.service.ParkingService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -21,12 +22,12 @@ public class ParkingController {
         this.service = service;
     }
 
-    @GetMapping("api/parking")
+    @GetMapping()
     public @ResponseBody Iterable<ParkingEntity> getAllParkingRequests() {
         return service.getAll();
     }
     
-    @GetMapping("api/parking")
+    @PostMapping()
     public @ResponseBody String addNewIncident(@RequestParam LocalDate date,
      @RequestParam boolean state){
 

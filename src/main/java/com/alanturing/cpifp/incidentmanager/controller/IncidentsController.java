@@ -3,6 +3,7 @@ package com.alanturing.cpifp.incidentmanager.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class IncidentsController {
     }
 
 
-    @GetMapping("api/incident")
+    @GetMapping()
     public @ResponseBody Iterable<IncidentEntity> getAllIncidents() {
 
         return service.getAll();
     }
 
-    @GetMapping("api/incident")
+    @PostMapping()
     public @ResponseBody String addNewIncident(@RequestParam String title,
      @RequestParam String description, @RequestParam String file){
 
