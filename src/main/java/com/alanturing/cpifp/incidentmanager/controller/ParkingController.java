@@ -1,8 +1,12 @@
 package com.alanturing.cpifp.incidentmanager.controller;
 
 import com.alanturing.cpifp.incidentmanager.core.parking.RequestDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyHasParkingRequest;
+import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingDto;
 import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingEntity;
-import com.alanturing.cpifp.incidentmanager.service.ParkingService;
+import com.alanturing.cpifp.incidentmanager.service.parking.ParkingService;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,27 +34,34 @@ public class ParkingController {
     }
     
     @PostMapping()
-    public @ResponseBody String addParkingRequest(@RequestBody ParkingEntity entity){
+    public @ResponseBody String addParkingRequest(@RequestBody ParkingDto request){
 
-        service.createRequest(entity);
+        try {
+            service.createRequest(request);
+        } catch (UserDoesNotExistsException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (UserAlreadyHasParkingRequest e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         return "Saved";
 
     }
 
     @PutMapping("/{id}")
-    public String updateParkingRequest(@PathVariable int id, @RequestBody ParkingEntity entity) {
+    public @ResponseBody String updateParkingRequest(@PathVariable int id, @RequestBody ParkingDto request) {
         try {
-            service.updateRequest(id, entity);
+            service.updateRequest(id, request);
         } catch (RequestDoesNotExistsException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "Updated";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteParkingRequest(@PathVariable int id) {
+    public @ResponseBody String deleteParkingRequest(@PathVariable int id) {
         service.deleteRequest(id);
         return "Deleted";
     }

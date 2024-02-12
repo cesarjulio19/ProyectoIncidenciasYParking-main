@@ -4,14 +4,24 @@ public class IncidentDto {
     private int id;
     private String title;
     private String description;
+    private boolean state;
     private String file;
     private int userId;
     
-    public IncidentDto(String title, String description, String file, int userId) {
+    public IncidentDto(String title, String description, String file, int userId, boolean state) {
         this.title = title;
         this.description = description;
         this.file = file;
         this.userId = userId;
+        this.state = state;
+    }
+
+    public boolean getState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
     public int getId() {

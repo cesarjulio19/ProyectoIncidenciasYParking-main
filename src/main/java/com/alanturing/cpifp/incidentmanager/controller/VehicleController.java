@@ -3,7 +3,8 @@ package com.alanturing.cpifp.incidentmanager.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alanturing.cpifp.incidentmanager.domain.vehicle.VehicleEntity;
-import com.alanturing.cpifp.incidentmanager.service.VehicleService;
+import com.alanturing.cpifp.incidentmanager.service.vehicle.VehicleService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

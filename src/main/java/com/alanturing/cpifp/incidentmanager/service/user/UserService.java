@@ -1,4 +1,4 @@
-package com.alanturing.cpifp.incidentmanager.service;
+package com.alanturing.cpifp.incidentmanager.service.user;
 
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
@@ -14,5 +14,5 @@ public interface UserService {
 
     public void delete(int id);
 
-    public String updateUser(int id, UserEntity entity) throws UserDoesNotExistsException;
+    public UserEntity updateUser(int id, UserEntity entity) throws UserDoesNotExistsException;
 }

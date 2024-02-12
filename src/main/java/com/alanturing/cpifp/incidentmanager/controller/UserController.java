@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
-import com.alanturing.cpifp.incidentmanager.service.UserService;
+import com.alanturing.cpifp.incidentmanager.service.user.UserService;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,13 +28,13 @@ public class UserController {
   }
 
   @PostMapping() 
-  public @ResponseBody UserEntity addNewUser (@RequestBody UserEntity entity) {
+  public @ResponseBody String addNewUser (@RequestBody UserEntity entity) {
     try {
-      return service.addNewUser(entity);
+      service.addNewUser(entity);
     } catch (UserAlreadyExistsException e) {
       e.printStackTrace();
     }
-    return entity;
+    return "Saved";
   }
 
   @GetMapping()
@@ -49,7 +50,6 @@ public class UserController {
     try {
       entity = service.getUser(id);
     } catch (UserDoesNotExistsException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return entity;
@@ -57,8 +57,9 @@ public class UserController {
   
   @Transactional
   @DeleteMapping("/{id}")
-  public @ResponseBody void deleteUser(@PathVariable int id) {
+  public @ResponseBody String deleteUser(@PathVariable int id) {
     service.delete(id);
+    return "Deleted";
   }
 
   @PutMapping("/{id}")

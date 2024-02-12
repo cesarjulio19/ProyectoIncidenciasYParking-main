@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alanturing.cpifp.incidentmanager.core.incident.IncidentDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentDto;
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
-import com.alanturing.cpifp.incidentmanager.service.IncidentService;
+import com.alanturing.cpifp.incidentmanager.service.incident.IncidentService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController 
 @RequestMapping("api/incidents") 
@@ -46,8 +49,20 @@ public class IncidentsController {
 
     }
 
+    @PutMapping("/{idInc}")
+    public @ResponseBody String updateIncident(@PathVariable int id, @RequestBody IncidentDto entity) {
+        try {
+            service.updateIncident(id, entity);
+        } catch (IncidentDoesNotExistsException e) {
+            e.printStackTrace();
+        }
+        
+        return "Updated";
+    }
+
     @DeleteMapping("/{idInc}")
-    public void deleteIncident(@PathVariable int idInc) {
+    public @ResponseBody String deleteIncident(@PathVariable int idInc) {
         service.deleteIncident(idInc);
+        return "Deleted";
     }
 }

@@ -2,6 +2,7 @@ package com.alanturing.cpifp.incidentmanager.domain.users;
 import java.util.Set;
 
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
+import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingEntity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "users")
 public class UserEntity {
@@ -38,7 +40,8 @@ public class UserEntity {
     private boolean parkingAccess;
     @OneToMany(mappedBy="user")
     private Set<IncidentEntity> incidents;
-
+    @OneToOne(mappedBy="user")
+    private ParkingEntity parkingRequest;
     
     public UserEntity() {}
     public UserEntity(int id, String name, String surname, String nif, String email, String password, int postalCode,
@@ -115,6 +118,12 @@ public class UserEntity {
     }
     public void setSchoolYear(String schoolYear) {
         this.schoolYear = schoolYear;
+    }
+    public ParkingEntity getParkingRequest() {
+        return parkingRequest;
+    }
+    public void setParkingRequest(ParkingEntity parkingRequest) {
+        this.parkingRequest = parkingRequest;
     }
 }
 

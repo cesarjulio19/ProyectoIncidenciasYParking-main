@@ -1,4 +1,4 @@
-package com.alanturing.cpifp.incidentmanager.service;
+package com.alanturing.cpifp.incidentmanager.service.vehicle;
 
 import com.alanturing.cpifp.incidentmanager.domain.vehicle.VehicleEntity;
 

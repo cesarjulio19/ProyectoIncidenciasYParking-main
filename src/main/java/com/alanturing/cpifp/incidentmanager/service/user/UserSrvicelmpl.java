@@ -1,4 +1,4 @@
-package com.alanturing.cpifp.incidentmanager.service;
+package com.alanturing.cpifp.incidentmanager.service.user;
 
 
 
@@ -34,10 +34,16 @@ public class UserSrvicelmpl implements UserService {
   }
 
   @Override
-  public String updateUser(int id, UserEntity entity) throws UserDoesNotExistsException {
-    UserEntity oldUser = userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistsException());
-    userRepository.save(entity);
-    return "Updated";
+  public UserEntity updateUser(int id, UserEntity entity) throws UserDoesNotExistsException {
+    UserEntity userDB = userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistsException());
+    userDB.setName(entity.getName());
+    userDB.setAddress(entity.getAddress());
+    userDB.setParkingAccess(entity.hasParkingAccess());
+    userDB.setPostalCode(entity.getPostalCode());
+    userDB.setSurname(entity.getSurname());
+    userDB.setPassword(entity.getPassword());
+    userDB.setSchoolYear(entity.getSchoolYear());
+    return userRepository.save(userDB);
   }
 
   @Override

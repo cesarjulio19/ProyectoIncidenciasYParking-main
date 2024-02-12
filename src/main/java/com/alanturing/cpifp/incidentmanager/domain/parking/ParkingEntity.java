@@ -2,10 +2,15 @@ package com.alanturing.cpifp.incidentmanager.domain.parking;
 
 import java.time.LocalDate;
 
+import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "parking-requests")
 public class ParkingEntity {
@@ -14,7 +19,11 @@ public class ParkingEntity {
     private int IdReq;
     private LocalDate date;
     private boolean state;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 
+    public ParkingEntity(){}
     public ParkingEntity(LocalDate date, boolean state) {
         this.date = date;
         this.state = state;
@@ -31,10 +40,16 @@ public class ParkingEntity {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-    public boolean isState() {
+    public boolean getState() {
         return state;
     }
     public void setState(boolean state) {
         this.state = state;
+    }
+    public UserEntity getUser() {
+        return user;
+    }
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }
