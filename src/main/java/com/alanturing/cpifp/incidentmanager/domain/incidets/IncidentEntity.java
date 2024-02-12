@@ -2,7 +2,7 @@ package com.alanturing.cpifp.incidentmanager.domain.incidets;
 
 import java.time.LocalDate;
 
-import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
+import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

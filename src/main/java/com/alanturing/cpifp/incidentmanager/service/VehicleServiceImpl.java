@@ -2,14 +2,18 @@ package com.alanturing.cpifp.incidentmanager.service;
 
 import org.springframework.stereotype.Service;
 
-import com.alanturing.cpifp.incidentmanager.domain.VehicleEntity;
-import com.alanturing.cpifp.incidentmanager.domain.VehicleRepository;
+import com.alanturing.cpifp.incidentmanager.domain.vehicle.VehicleEntity;
+import com.alanturing.cpifp.incidentmanager.domain.vehicle.VehicleRepository;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleRepository repository;
+    private final VehicleRepository repository;
 
+
+    public VehicleServiceImpl(VehicleRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Iterable<VehicleEntity> getAll() {
@@ -22,5 +26,4 @@ public class VehicleServiceImpl implements VehicleService {
         repository.save(vehicle);
         return "Saved";
     }
-    
 }

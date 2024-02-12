@@ -1,6 +1,6 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import com.alanturing.cpifp.incidentmanager.domain.VehicleEntity;
+import com.alanturing.cpifp.incidentmanager.domain.vehicle.VehicleEntity;
 
 public interface VehicleService {
     public Iterable<VehicleEntity> getAll();

@@ -1,4 +1,4 @@
-package com.alanturing.cpifp.incidentmanager.domain;
+package com.alanturing.cpifp.incidentmanager.domain.vehicle;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

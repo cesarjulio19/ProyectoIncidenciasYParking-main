@@ -1,4 +1,4 @@
-package com.alanturing.cpifp.incidentmanager.domain;
+package com.alanturing.cpifp.incidentmanager.domain.users;
 import org.springframework.data.repository.CrudRepository;
 
 

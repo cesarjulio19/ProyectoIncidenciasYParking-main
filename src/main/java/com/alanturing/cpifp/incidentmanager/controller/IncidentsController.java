@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentDto;
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
 import com.alanturing.cpifp.incidentmanager.service.IncidentService;

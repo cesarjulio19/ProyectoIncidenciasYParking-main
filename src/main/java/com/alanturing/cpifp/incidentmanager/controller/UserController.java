@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
-import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
-import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
+import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
+import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 import com.alanturing.cpifp.incidentmanager.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;

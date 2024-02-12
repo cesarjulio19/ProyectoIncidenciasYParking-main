@@ -4,15 +4,15 @@ package com.alanturing.cpifp.incidentmanager.service;
 
 import org.springframework.stereotype.Service;
 
-import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
-import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
-import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
-import com.alanturing.cpifp.incidentmanager.domain.UserRepository;
+import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
+import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
+import com.alanturing.cpifp.incidentmanager.domain.users.UserRepository;
 
 @Service
 public class UserSrvicelmpl implements UserService {
 
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
   public UserSrvicelmpl(UserRepository userRepository) {
     this.userRepository = userRepository;

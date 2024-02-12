@@ -1,8 +1,8 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
-import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
-import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
+import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
+import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 
 public interface UserService {
 
