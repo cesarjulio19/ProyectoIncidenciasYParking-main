@@ -1,11 +1,14 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import com.alanturing.cpifp.incidentmanager.domain.IncidentEntity;
+import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentDto;
+import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
 
 public interface IncidentService {
     
     public Iterable<IncidentEntity> getAll();
 
-    public String addNewIncident(String title, String description, String file);
+    public String addNewIncident(IncidentDto incident) throws UserDoesNotExistsException;
 
+    public void deleteIncident(int idInc);
 }

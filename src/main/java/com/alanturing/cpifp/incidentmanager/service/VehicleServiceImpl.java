@@ -1,6 +1,5 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alanturing.cpifp.incidentmanager.domain.VehicleEntity;
@@ -8,7 +7,7 @@ import com.alanturing.cpifp.incidentmanager.domain.VehicleRepository;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
-    @Autowired
+
     private VehicleRepository repository;
 
 

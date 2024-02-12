@@ -1,11 +1,15 @@
-package com.alanturing.cpifp.incidentmanager.domain;
+package com.alanturing.cpifp.incidentmanager.domain.incidets;
 
 import java.time.LocalDate;
+
+import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "incidents")
 public class IncidentEntity {
@@ -18,12 +22,18 @@ public class IncidentEntity {
     private LocalDate date;
     private boolean state;
     private String file;
-    public IncidentEntity(String title, String description, LocalDate date, boolean state, String file) {
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private UserEntity user;
+    public IncidentEntity() {}
+    public IncidentEntity(int idInc, String title, String description, LocalDate date, boolean state, String file, UserEntity user) {
+        this.idInc = idInc;
         this.title = title;
         this.description = description;
         this.date = date;
         this.state = state;
         this.file = file;
+        this.user = user;
     }
     public int getIdInc() {
         return idInc;
@@ -62,8 +72,11 @@ public class IncidentEntity {
         this.date = date;
     }
 
-    
-   
-
+    public UserEntity getUser() {
+        return user;
+    }
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
 }

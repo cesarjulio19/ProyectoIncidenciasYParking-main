@@ -1,17 +1,22 @@
 package com.alanturing.cpifp.incidentmanager.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.stereotype.Service;
 
 import com.alanturing.cpifp.incidentmanager.core.UserAlreadyExistsException;
+import com.alanturing.cpifp.incidentmanager.core.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.UserEntity;
 import com.alanturing.cpifp.incidentmanager.domain.UserRepository;
 
 @Service
-public class UserSrvicelmpl implements UserService{
+public class UserSrvicelmpl implements UserService {
 
-  @Autowired 
   private UserRepository userRepository;
+
+  public UserSrvicelmpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public Iterable<UserEntity> getAll() {
@@ -19,17 +24,8 @@ public class UserSrvicelmpl implements UserService{
   }
 
   @Override
-  public String addNewUser(String name, String email, String surname,
-  String password, String address, int postalCode, String nif, String schoolYear) throws UserAlreadyExistsException {
-      
-    UserEntity n = new UserEntity(name, surname, nif, email, password, postalCode,
-    address, "User", schoolYear, false);
-    if (userRepository.existsByEmail(email)) {
-      throw new UserAlreadyExistsException();
-    }
-
-    userRepository.save(n);
-    return "Saved";
+  public UserEntity addNewUser(UserEntity entity) throws UserAlreadyExistsException {
+    return userRepository.save(entity);
   }
 
   @Override
@@ -38,9 +34,15 @@ public class UserSrvicelmpl implements UserService{
   }
 
   @Override
-  public String updateUser(int id, UserEntity entity) {
-    UserEntity oldUser = userRepository.findById(id).orElseThrow();
+  public String updateUser(int id, UserEntity entity) throws UserDoesNotExistsException {
+    UserEntity oldUser = userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistsException());
     userRepository.save(entity);
     return "Updated";
+  }
+
+  @Override
+  public UserEntity getUser(int id) throws UserDoesNotExistsException {
+    UserEntity entity = userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistsException());
+    return entity;
   }
 }

@@ -1,4 +1,7 @@
 package com.alanturing.cpifp.incidentmanager.domain;
+import java.util.Set;
+
+import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -6,12 +9,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int idUsu;
+    private int id;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     private String name;
     private String surname;
     @Nonnull
@@ -26,9 +36,14 @@ public class UserEntity {
     private String rol;
     private String schoolYear;
     private boolean parkingAccess;
+    @OneToMany(mappedBy="user")
+    private Set<IncidentEntity> incidents;
 
-    public UserEntity(String name, String surname, String nif, String email, String password, int postalCode,
+    
+    public UserEntity() {}
+    public UserEntity(int id, String name, String surname, String nif, String email, String password, int postalCode,
             String address, String rol, String schoolYear, boolean parkingAccess) {
+                this.id = id;
         this.name = name;
         this.surname = surname;
         this.nif = nif;
