@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController 
-@RequestMapping("api/parking-requests")
+@RequestMapping("api/parking_requests")
 public class ParkingController {
     private ParkingService service;
 

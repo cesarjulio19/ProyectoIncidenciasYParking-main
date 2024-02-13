@@ -23,7 +23,7 @@ public class IncidentEntity {
     private boolean state;
     private String file;
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
     public IncidentEntity() {}
     public IncidentEntity(int idInc, String title, String description, LocalDate date, boolean state, String file, UserEntity user) {

@@ -12,15 +12,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
-@Entity(name = "parking-requests")
+@Entity(name = "parking_requests")
 public class ParkingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int IdReq;
+    private int idReq;
     private LocalDate date;
     private boolean state;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     public ParkingEntity(){}
@@ -29,10 +29,10 @@ public class ParkingEntity {
         this.state = state;
     }
     public int getIdReq() {
-        return IdReq;
+        return idReq;
     }
     public void setIdReq(int idReq) {
-        IdReq = idReq;
+        this.idReq = idReq;
     }
     public LocalDate getDate() {
         return date;

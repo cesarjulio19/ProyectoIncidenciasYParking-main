@@ -34,15 +34,12 @@ public class ParkingServiceImpl implements ParkingService {
     public ParkingEntity createRequest(ParkingDto request) throws UserDoesNotExistsException, UserAlreadyHasParkingRequest {
         int userId = request.getUser_id();
         UserEntity user = this.userRepository.findById(userId).orElseThrow(() -> new UserDoesNotExistsException());
-        if(user.getParkingRequest() != null) {
-            throw new UserAlreadyHasParkingRequest();
-        } else {
-            ParkingEntity newRequest = new ParkingEntity();
-            BeanUtils.copyProperties(request, newRequest, "user_id");
-            newRequest.setUser(user);
-            newRequest.setDate(LocalDate.now());
-            return parkingRepository.save(newRequest);
-        }
+        ParkingEntity newRequest = new ParkingEntity();
+        BeanUtils.copyProperties(request, newRequest, "user_id");
+        newRequest.setUser(user);
+        newRequest.setDate(LocalDate.now());
+        return parkingRepository.save(newRequest);
+        
     }
 
     @Override

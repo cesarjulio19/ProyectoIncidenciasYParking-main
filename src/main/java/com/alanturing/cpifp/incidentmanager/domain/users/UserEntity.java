@@ -11,19 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     private String name;
     private String surname;
     @Nonnull
@@ -40,8 +33,6 @@ public class UserEntity {
     private boolean parkingAccess;
     @OneToMany(mappedBy="user")
     private Set<IncidentEntity> incidents;
-    @OneToOne(mappedBy="user")
-    private ParkingEntity parkingRequest;
     
     public UserEntity() {}
     public UserEntity(int id, String name, String surname, String nif, String email, String password, int postalCode,
@@ -119,11 +110,12 @@ public class UserEntity {
     public void setSchoolYear(String schoolYear) {
         this.schoolYear = schoolYear;
     }
-    public ParkingEntity getParkingRequest() {
-        return parkingRequest;
+    
+    public int getId() {
+        return id;
     }
-    public void setParkingRequest(ParkingEntity parkingRequest) {
-        this.parkingRequest = parkingRequest;
+    public void setId(int id) {
+        this.id = id;
     }
 }
 
