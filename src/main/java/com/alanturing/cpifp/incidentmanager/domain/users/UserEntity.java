@@ -2,7 +2,6 @@ package com.alanturing.cpifp.incidentmanager.domain.users;
 import java.util.Set;
 
 import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
-import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingEntity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
