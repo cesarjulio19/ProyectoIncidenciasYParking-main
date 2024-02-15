@@ -5,10 +5,10 @@ public class IncidentDto {
     private String title;
     private String description;
     private boolean state;
-    private String file;
+    private byte[] file;
     private int userId;
     
-    public IncidentDto(String title, String description, String file, int userId, boolean state) {
+    public IncidentDto(String title, String description, byte[] file, int userId, boolean state) {
         this.title = title;
         this.description = description;
         this.file = file;
@@ -42,10 +42,10 @@ public class IncidentDto {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getFile() {
+    public byte[] getFile() {
         return file;
     }
-    public void setFile(String file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
     public int getUserId() {

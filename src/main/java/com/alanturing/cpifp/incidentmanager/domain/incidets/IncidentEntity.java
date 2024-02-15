@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity(name = "incidents")
@@ -21,12 +23,14 @@ public class IncidentEntity {
     private String description;
     private LocalDate date;
     private boolean state;
-    private String file;
+    @Lob
+    @Column(name = "file", columnDefinition = "BLOB")
+    private byte[] file;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
     public IncidentEntity() {}
-    public IncidentEntity(int idInc, String title, String description, LocalDate date, boolean state, String file, UserEntity user) {
+    public IncidentEntity(int idInc, String title, String description, LocalDate date, boolean state, byte[] file, UserEntity user) {
         this.idInc = idInc;
         this.title = title;
         this.description = description;
@@ -59,10 +63,10 @@ public class IncidentEntity {
     public void setState(boolean state) {
         this.state = state;
     }
-    public String getFile() {
+    public byte[] getFile() {
         return file;
     }
-    public void setFile(String file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
     public LocalDate getDate() {
