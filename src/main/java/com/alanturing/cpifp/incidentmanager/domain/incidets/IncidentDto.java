@@ -6,14 +6,16 @@ public class IncidentDto {
     private String description;
     private boolean state;
     private byte[] file;
+    private String fileType;
     private int userId;
     
-    public IncidentDto(String title, String description, byte[] file, int userId, boolean state) {
+    public IncidentDto(String title, String description, byte[] file, String fileType, int userId, boolean state) {
         this.title = title;
         this.description = description;
         this.file = file;
         this.userId = userId;
         this.state = state;
+        this.fileType = fileType;
     }
 
     public boolean getState() {
@@ -53,5 +55,11 @@ public class IncidentDto {
     }
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+    public String getFileType() {
+        return fileType;
+    }
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 }

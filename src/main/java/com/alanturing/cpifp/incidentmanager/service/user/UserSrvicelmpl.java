@@ -1,7 +1,5 @@
 package com.alanturing.cpifp.incidentmanager.service.user;
 
-
-
 import org.springframework.stereotype.Service;
 
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;

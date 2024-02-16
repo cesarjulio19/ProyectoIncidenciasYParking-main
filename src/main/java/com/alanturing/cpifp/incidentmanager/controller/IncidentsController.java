@@ -49,7 +49,9 @@ public class IncidentsController {
         try {
             InputStream imageInputStream = file.getInputStream();
             byte[] imageBytes = imageInputStream.readAllBytes();
+            String contentType = file.getContentType();
             incident.setFile(imageBytes);
+            incident.setFileType(contentType);
             service.addNewIncident(incident);
         } catch (IOException e) {
             e.printStackTrace();

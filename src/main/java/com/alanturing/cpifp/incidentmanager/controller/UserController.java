@@ -1,13 +1,19 @@
 package com.alanturing.cpifp.incidentmanager.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
@@ -28,10 +34,18 @@ public class UserController {
   }
 
   @PostMapping() 
-  public @ResponseBody String addNewUser (@RequestBody UserEntity entity) {
+  public @ResponseBody String addNewUser (@RequestPart("user") UserEntity entity,
+   @RequestParam("file") MultipartFile file) {
     try {
+      InputStream iS = file.getInputStream();
+      byte[] imageBytes = iS.readAllBytes();
+      String contentType = file.getContentType();
+      entity.setFile(imageBytes);
+      entity.setFileType(contentType);
       service.addNewUser(entity);
     } catch (UserAlreadyExistsException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
       e.printStackTrace();
     }
     return "Saved";
