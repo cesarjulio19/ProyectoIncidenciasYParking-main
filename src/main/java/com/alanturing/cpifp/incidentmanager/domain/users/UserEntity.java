@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+//import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 
 @Entity(name = "users")
@@ -31,16 +31,16 @@ public class UserEntity {
     private String rol;
     private String schoolYear;
     private boolean parkingAccess;
-    @Lob
-    @Column(name = "file", columnDefinition = "BLOB")
+    /*@Lob
+    @Column(name = "file", columnDefinition = "LONGBLOB")
     private byte[] file;
-    private String fileType;
+    private String fileType;*/
     @OneToMany(mappedBy="user")
     private Set<IncidentEntity> incidents;
     
     public UserEntity() {}
     public UserEntity(int id, String name, String surname, String nif, String email, String password, int postalCode,
-            String address, String rol, String schoolYear, boolean parkingAccess, byte[] file, String fileType) {
+            String address, String rol, String schoolYear, boolean parkingAccess/*, byte[] file, String fileType*/) {
                 this.id = id;
         this.name = name;
         this.surname = surname;
@@ -52,8 +52,8 @@ public class UserEntity {
         this.rol = rol;
         this.schoolYear = schoolYear;
         this.parkingAccess = parkingAccess;
-        this.file = file;
-        this.fileType = fileType;
+       /*  this.file = file;
+        this.fileType = fileType;*/
     }
 
     public boolean hasParkingAccess() {
@@ -122,7 +122,7 @@ public class UserEntity {
     public void setId(int id) {
         this.id = id;
     }
-    public byte[] getFile() {
+    /*public byte[] getFile() {
         return file;
     }
     public void setFile(byte[] file) {
@@ -133,5 +133,5 @@ public class UserEntity {
     }
     public void setFileType(String fileType) {
         this.fileType = fileType;
-    }
+    }*/
 }

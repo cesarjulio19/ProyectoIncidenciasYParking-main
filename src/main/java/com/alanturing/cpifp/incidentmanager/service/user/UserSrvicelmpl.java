@@ -49,4 +49,9 @@ public class UserSrvicelmpl implements UserService {
     UserEntity entity = userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistsException());
     return entity;
   }
+
+  @Override
+  public UserEntity getUserByEmail(String email) throws UserDoesNotExistsException {
+    return userRepository.findByEmail(email).orElseThrow(() -> new UserDoesNotExistsException());
+  }
 }

@@ -3,6 +3,10 @@ package com.alanturing.cpifp.incidentmanager.controller;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.springframework.context.annotation.Bean;
+/*import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfToken;*/
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,41 +28,45 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController 
-@RequestMapping("api/users") 
+@RequestMapping() 
 public class UserController {
 
-  private UserService service;
+  private final UserService service;
+  //private PasswordEncoder encoder;
 
   public UserController(UserService service) {
       this.service = service;
+      //this.encoder = new BCryptPasswordEncoder();
   }
 
-  @PostMapping() 
-  public @ResponseBody String addNewUser (@RequestPart("user") UserEntity entity,
-   @RequestParam("file") MultipartFile file) {
+  @PostMapping("register") 
+  public @ResponseBody String addNewUser (@RequestBody UserEntity entity//,
+   /*@RequestParam("file") MultipartFile file*/) {
     try {
-      InputStream iS = file.getInputStream();
+      /*InputStream iS = file.getInputStream();
       byte[] imageBytes = iS.readAllBytes();
       String contentType = file.getContentType();
       entity.setFile(imageBytes);
-      entity.setFileType(contentType);
+      entity.setFileType(contentType);*/
+      //String encodedPassword = this.encoder.encode(entity.getPassword());
+      //entity.setPassword(encodedPassword);
       service.addNewUser(entity);
     } catch (UserAlreadyExistsException e) {
       e.printStackTrace();
-    } catch (IOException e) {
+    }/*  catch (IOException e) {
       e.printStackTrace();
-    }
-    return "Saved";
+    }*/
+    return entity.getPassword();
   }
 
-  @GetMapping()
+  @GetMapping("api/users")
   public @ResponseBody Iterable<UserEntity> getAllUsers() {
   
     return service.getAll();
 
   }
 
-  @GetMapping("/{id}")
+  /*@GetMapping("api/users/{id}")
   public @ResponseBody UserEntity getUser(@PathVariable int id) {
     UserEntity entity = new UserEntity();
     try {
@@ -67,16 +75,28 @@ public class UserController {
       e.printStackTrace();
     }
     return entity;
+  }*/
+
+  @GetMapping("api/users/{email}")
+  public @ResponseBody UserEntity getUserByEmail(@PathVariable String email) {
+    UserEntity entity = new UserEntity();
+    try {
+      entity = service.getUserByEmail(email);
+    } catch (UserDoesNotExistsException e) {
+      e.printStackTrace();
+    }
+    return entity;
   }
   
+  
   @Transactional
-  @DeleteMapping("/{id}")
+  @DeleteMapping("api/users/{id}")
   public @ResponseBody String deleteUser(@PathVariable int id) {
     service.delete(id);
     return "Deleted";
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("api/users/{id}")
   public @ResponseBody String updateUser(@PathVariable int id, @RequestBody UserEntity entity) {
     try {
       service.updateUser(id, entity);
@@ -85,4 +105,9 @@ public class UserController {
     }
     return "Updated";
   }
+
+  /*@GetMapping("csrf")
+  public CsrfToken getCsrfToken(CsrfToken token) {
+      return token;
+  }*/
 }

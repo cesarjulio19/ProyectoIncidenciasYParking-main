@@ -10,6 +10,8 @@ public interface UserService {
 
     public UserEntity getUser(int id) throws UserDoesNotExistsException;
 
+    public UserEntity getUserByEmail(String email) throws UserDoesNotExistsException;
+
     public UserEntity addNewUser(UserEntity entity) throws UserAlreadyExistsException;
 
     public void delete(int id);
