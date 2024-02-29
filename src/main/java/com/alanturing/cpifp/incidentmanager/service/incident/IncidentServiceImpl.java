@@ -38,6 +38,7 @@ public class IncidentServiceImpl implements IncidentService {
         BeanUtils.copyProperties(incident, n, "user_id");
         n.setUser(user);
         n.setDate(LocalDate.now());
+        n.setState(false);
         return incidentRepository.save(n);
     }
 
@@ -51,8 +52,13 @@ public class IncidentServiceImpl implements IncidentService {
         IncidentEntity incidentDB = this.incidentRepository.findById(idInc).orElseThrow(() -> new IncidentDoesNotExistsException());
         incidentDB.setDescription(incident.getDescription());
         incidentDB.setTitle(incident.getTitle());
-        incidentDB.setFile(incident.getFile());
+        //incidentDB.setFile(incident.getFile());
         incidentDB.setState(incident.getState());
         return incidentRepository.save(incidentDB);
+    }
+
+    @Override
+    public IncidentEntity getIncident(int idInc) throws IncidentDoesNotExistsException {
+        return incidentRepository.findById(idInc).orElseThrow(() -> new IncidentDoesNotExistsException());
     }
 }

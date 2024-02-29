@@ -9,6 +9,8 @@ public interface IncidentService {
     
     public Iterable<IncidentEntity> getAll();
 
+    public IncidentEntity getIncident(int idInc) throws IncidentDoesNotExistsException;
+
     public IncidentEntity addNewIncident(IncidentDto incident) throws UserDoesNotExistsException;
 
     public void deleteIncident(int idInc);

@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.context.annotation.Bean;
-/*import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfToken;*/
+/* import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder; */
+//import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
+import com.alanturing.cpifp.incidentmanager.domain.users.Credentials;
 import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 import com.alanturing.cpifp.incidentmanager.service.user.UserService;
 
@@ -32,11 +33,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
 
   private final UserService service;
-  //private PasswordEncoder encoder;
+  //private final PasswordEncoder encoder;
 
-  public UserController(UserService service) {
+  public UserController(UserService service/*, PasswordEncoder encoder*/) {
       this.service = service;
-      //this.encoder = new BCryptPasswordEncoder();
+      //this.encoder = encoder;
+  }
+
+  @PostMapping("login")
+  public boolean login(@RequestBody Credentials credentials) {
+    UserEntity user;
+    try {
+      user = service.getUserByEmail(credentials.getEmail());
+      //return encoder.matches(password, user.getPassword());
+      if(user.getPassword().equals(credentials.getPassword()))
+        return true;
+      else
+        return false;
+    } catch (UserDoesNotExistsException e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @PostMapping("register") 
@@ -51,12 +68,13 @@ public class UserController {
       //String encodedPassword = this.encoder.encode(entity.getPassword());
       //entity.setPassword(encodedPassword);
       service.addNewUser(entity);
+      return "Saved";
     } catch (UserAlreadyExistsException e) {
       e.printStackTrace();
+      return "Not Saved";
     }/*  catch (IOException e) {
       e.printStackTrace();
     }*/
-    return entity.getPassword();
   }
 
   @GetMapping("api/users")
@@ -66,19 +84,8 @@ public class UserController {
 
   }
 
-  /*@GetMapping("api/users/{id}")
-  public @ResponseBody UserEntity getUser(@PathVariable int id) {
-    UserEntity entity = new UserEntity();
-    try {
-      entity = service.getUser(id);
-    } catch (UserDoesNotExistsException e) {
-      e.printStackTrace();
-    }
-    return entity;
-  }*/
-
   @GetMapping("api/users/{email}")
-  public @ResponseBody UserEntity getUserByEmail(@PathVariable String email) {
+  public @ResponseBody UserEntity getUser(@PathVariable("email") String email) {
     UserEntity entity = new UserEntity();
     try {
       entity = service.getUserByEmail(email);
@@ -100,10 +107,11 @@ public class UserController {
   public @ResponseBody String updateUser(@PathVariable int id, @RequestBody UserEntity entity) {
     try {
       service.updateUser(id, entity);
+      return "Saved";
     } catch (UserDoesNotExistsException e) {
       e.printStackTrace();
+      return "Not saved";
     }
-    return "Updated";
   }
 
   /*@GetMapping("csrf")

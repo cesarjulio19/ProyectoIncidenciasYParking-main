@@ -6,7 +6,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.alanturing.cpifp.incidentmanager.core.parking.RequestDoesNotExistsException;
-import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyHasParkingRequest;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingDto;
 import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingEntity;
@@ -31,7 +30,7 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public ParkingEntity createRequest(ParkingDto request) throws UserDoesNotExistsException, UserAlreadyHasParkingRequest {
+    public ParkingEntity createRequest(ParkingDto request) throws UserDoesNotExistsException {
         int userId = request.getUser_id();
         UserEntity user = this.userRepository.findById(userId).orElseThrow(() -> new UserDoesNotExistsException());
         ParkingEntity newRequest = new ParkingEntity();
@@ -52,5 +51,10 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public void deleteRequest(int id) {
         parkingRepository.deleteById(id);
+    }
+
+    @Override
+    public ParkingEntity getRequest(int id) throws RequestDoesNotExistsException {
+        return parkingRepository.findById(id).orElseThrow(() -> new RequestDoesNotExistsException());
     }
 }

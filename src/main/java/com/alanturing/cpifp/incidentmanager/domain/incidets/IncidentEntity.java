@@ -23,24 +23,24 @@ public class IncidentEntity {
     private String description;
     private LocalDate date;
     private boolean state;
-    @Lob
+    /*@Lob
     @Column(name = "file", columnDefinition = "BLOB")
     private byte[] file;
-    private String fileType;
+    private String fileType;*/
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
     public IncidentEntity() {}
     public IncidentEntity(int idInc, String title, String description, LocalDate date, boolean state,
-     byte[] file, String fileType, UserEntity user) {
+     /* byte[] file, String fileType, */ UserEntity user) {
         this.idInc = idInc;
         this.title = title;
         this.description = description;
         this.date = date;
         this.state = state;
-        this.file = file;
+        //this.file = file;
         this.user = user;
-        this.fileType = fileType;
+        //this.fileType = fileType;
     }
     public int getIdInc() {
         return idInc;
@@ -66,12 +66,12 @@ public class IncidentEntity {
     public void setState(boolean state) {
         this.state = state;
     }
-    public byte[] getFile() {
+    /* public byte[] getFile() {
         return file;
     }
     public void setFile(byte[] file) {
         this.file = file;
-    }
+    } */
     public LocalDate getDate() {
         return date;
     }
@@ -85,10 +85,10 @@ public class IncidentEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-    public String getFileType() {
+    /* public String getFileType() {
         return fileType;
     }
     public void setFileType(String fileType) {
         this.fileType = fileType;
-    }
+    } */
 }

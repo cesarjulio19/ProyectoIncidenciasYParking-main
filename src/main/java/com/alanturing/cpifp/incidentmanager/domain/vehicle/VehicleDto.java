@@ -1,33 +1,20 @@
 package com.alanturing.cpifp.incidentmanager.domain.vehicle;
 
-import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
-@Entity(name = "vehicles")
-public class VehicleEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class VehicleDto {
     private int idV;
     private String model;
     private String color;
     private String licensePlate;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    private int user_id;
 
-    public VehicleEntity() {}
-    public VehicleEntity(String model, String color, String licensePlate) {
+    public VehicleDto(int idV, String model, String color, String licensePlate, int user_id) {
+        this.idV = idV;
         this.model = model;
         this.color = color;
         this.licensePlate = licensePlate;
+        this.user_id = user_id;
     }
+
     public int getIdV() {
         return idV;
     }
@@ -52,10 +39,10 @@ public class VehicleEntity {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
-    public UserEntity getUser() {
-        return user;
+    public int getUser_id() {
+        return user_id;
     }
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

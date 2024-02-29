@@ -43,34 +43,48 @@ public class IncidentsController {
         return service.getAll();
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String addNewIncident(@RequestPart("incident") IncidentDto incident,
-     @RequestParam("file") MultipartFile file){
+    @GetMapping("/{idInc}")
+    public IncidentEntity getIncident(@PathVariable("idInc") int idInc) {
+        IncidentEntity entity = new IncidentEntity();
         try {
-            InputStream imageInputStream = file.getInputStream();
+            entity = service.getIncident(idInc);
+        } catch (IncidentDoesNotExistsException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
+    
+
+    @PostMapping(/*consumes = MediaType.MULTIPART_FORM_DATA_VALUE*/)
+    public @ResponseBody String addNewIncident(/* @RequestPart("incident") */@RequestBody IncidentDto incident/*,
+     @RequestParam("file") MultipartFile file*/){
+        try {
+            /*InputStream imageInputStream = file.getInputStream();
             byte[] imageBytes = imageInputStream.readAllBytes();
             String contentType = file.getContentType();
             incident.setFile(imageBytes);
-            incident.setFileType(contentType);
-            service.addNewIncident(incident);
-        } catch (IOException e) {
+            incident.setFileType(contentType);*/
+            service.addNewIncident(incident);  
+            return "Saved";
+        } /*catch (IOException e) {
             e.printStackTrace();
-        } catch (UserDoesNotExistsException e) {
+        }*/ catch (UserDoesNotExistsException e) {
             e.printStackTrace();
+            return "Not saved";
         }
-        return "Saved";
 
     }
 
     @PutMapping("/{idInc}")
-    public @ResponseBody String updateIncident(@PathVariable int id, @RequestBody IncidentDto entity) {
+    public @ResponseBody String updateIncident(@PathVariable int idInc, @RequestBody IncidentDto entity) {
         try {
-            service.updateIncident(id, entity);
+            service.updateIncident(idInc, entity);
+            return "Saved";
         } catch (IncidentDoesNotExistsException e) {
             e.printStackTrace();
+            return "Not saved";
         }
         
-        return "Updated";
     }
 
     @DeleteMapping("/{idInc}")

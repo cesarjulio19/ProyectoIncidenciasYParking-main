@@ -1,7 +1,6 @@
 package com.alanturing.cpifp.incidentmanager.controller;
 
 import com.alanturing.cpifp.incidentmanager.core.parking.RequestDoesNotExistsException;
-import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyHasParkingRequest;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingDto;
 import com.alanturing.cpifp.incidentmanager.domain.parking.ParkingEntity;
@@ -38,26 +37,33 @@ public class ParkingController {
 
         try {
             service.createRequest(request);
+            return "Saved";
         } catch (UserDoesNotExistsException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (UserAlreadyHasParkingRequest e) {
-            // TODO Auto-generated catch block
+            return "Not saved";
+        }
+    }
+
+    @GetMapping("/{id}")
+    public @ResponseBody ParkingEntity getParkingRequest(@PathVariable("idV") int id) {
+        ParkingEntity request = new ParkingEntity();
+        try {
+            request = service.getRequest(id);
+        } catch (RequestDoesNotExistsException e) {
             e.printStackTrace();
         }
-
-        return "Saved";
-
+        return request;
     }
 
     @PutMapping("/{id}")
     public @ResponseBody String updateParkingRequest(@PathVariable int id, @RequestBody ParkingDto request) {
         try {
             service.updateRequest(id, request);
+            return "Updated";
         } catch (RequestDoesNotExistsException e) {
             e.printStackTrace();
+            return "Not Saved";
         }
-        return "Updated";
     }
 
     @DeleteMapping("/{id}")
