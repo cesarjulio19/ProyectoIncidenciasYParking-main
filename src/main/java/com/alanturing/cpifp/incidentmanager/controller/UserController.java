@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.alanturing.cpifp.incidentmanager.domain.incidets.IncidentEntity;
 import com.alanturing.cpifp.incidentmanager.core.user.UserAlreadyExistsException;
 import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException;
 import com.alanturing.cpifp.incidentmanager.domain.users.Credentials;
 import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 import com.alanturing.cpifp.incidentmanager.service.user.UserService;
-
+import java.utils.Set;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -112,6 +112,23 @@ public class UserController {
       e.printStackTrace();
       return "Not saved";
     }
+  }
+
+  @GetMapping("api/{userId}/incidents")
+  public Set<IncidentEntity> getIncidentsByUserId(@PathVariable int userId){
+    UserEntity user = new UserEntity();
+    Set<IncidentEntity> incidents = null;
+
+    try{
+      user = service.getUser(userId);
+      incidents = user.getIncidents();
+
+    }catch(UserDoesNotExistsException e){
+      e.printStackTrace();
+    }
+
+    return incidents; 
+
   }
 
   /*@GetMapping("csrf")

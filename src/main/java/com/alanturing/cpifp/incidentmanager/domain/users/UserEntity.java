@@ -122,6 +122,12 @@ public class UserEntity {
     public void setId(int id) {
         this.id = id;
     }
+    public Set<IncidentEntity> getIncidents(){
+        return incidents;
+    }
+    public void setIncidents(Set<IncidentEntity> incidents){
+        this.incidents = incidents;
+    }
     /*public byte[] getFile() {
         return file;
     }
