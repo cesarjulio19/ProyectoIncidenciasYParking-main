@@ -24,7 +24,7 @@ import com.alanturing.cpifp.incidentmanager.core.user.UserDoesNotExistsException
 import com.alanturing.cpifp.incidentmanager.domain.users.Credentials;
 import com.alanturing.cpifp.incidentmanager.domain.users.UserEntity;
 import com.alanturing.cpifp.incidentmanager.service.user.UserService;
-import java.utils.Set;
+import java.util.Set;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
