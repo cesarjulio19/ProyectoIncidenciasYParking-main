@@ -67,7 +67,7 @@ public class VehicleController {
     }
 
     @DeleteMapping("/{id}")
-    private @ResponseBody String deleteVehicle(@PathVariable int id) {
+    private @ResponseBody String deleteVehicle(@PathVariable("idV") int id) {
         service.deleteVehicle(id);
         return "Deleted";
     }
