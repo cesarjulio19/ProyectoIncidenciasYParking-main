@@ -45,7 +45,7 @@ public class ParkingController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ParkingEntity getParkingRequest(@PathVariable("idV") int id) {
+    public @ResponseBody ParkingEntity getParkingRequest(@PathVariable("id") int id) {
         ParkingEntity request = new ParkingEntity();
         try {
             request = service.getRequest(id);
@@ -66,9 +66,9 @@ public class ParkingController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public @ResponseBody String deleteParkingRequest(@PathVariable int id) {
-        service.deleteRequest(id);
+    @DeleteMapping("/{idReq}")
+    public @ResponseBody String deleteParkingRequest(@PathVariable int idReq) {
+        service.deleteRequest(idReq);
         return "Deleted";
     }
 }

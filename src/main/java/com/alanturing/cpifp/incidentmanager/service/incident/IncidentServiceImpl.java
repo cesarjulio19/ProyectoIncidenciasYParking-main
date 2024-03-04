@@ -35,7 +35,7 @@ public class IncidentServiceImpl implements IncidentService {
         int userId = incident.getUserId();
         UserEntity user = this.userRepository.findById(userId).orElseThrow(() -> new UserDoesNotExistsException());
         IncidentEntity n = new IncidentEntity();
-        BeanUtils.copyProperties(incident, n, "user_id");
+        BeanUtils.copyProperties(incident, n, "userId");
         n.setUser(user);
         n.setDate(LocalDate.now());
         n.setState(false);

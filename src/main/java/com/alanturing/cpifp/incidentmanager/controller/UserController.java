@@ -57,12 +57,11 @@ public class UserController {
   }
 
   @PostMapping("register") 
-  public @ResponseBody String addNewUser (@RequestBody UserEntity entity//,
-   /*@RequestParam("file") MultipartFile file*/) {
+  public @ResponseBody String addNewUser (/*@RequestPart*/@RequestBody UserEntity entity/*, @RequestParam MultipartFile file*/) {
     try {
-      /*InputStream iS = file.getInputStream();
+      /* InputStream iS = file.getInputStream();
       byte[] imageBytes = iS.readAllBytes();
-      String contentType = file.getContentType();
+      String contentType = file.getContentType(); 
       entity.setFile(imageBytes);
       entity.setFileType(contentType);*/
       //String encodedPassword = this.encoder.encode(entity.getPassword());
@@ -72,9 +71,10 @@ public class UserController {
     } catch (UserAlreadyExistsException e) {
       e.printStackTrace();
       return "Not Saved";
-    }/*  catch (IOException e) {
+    } /* catch (IOException e) {
       e.printStackTrace();
-    }*/
+      return "Not Saved";
+    } */
   }
 
   @GetMapping("api/users")
@@ -114,7 +114,7 @@ public class UserController {
     }
   }
 
-  @GetMapping("api/{userId}/incidents")
+  /*@GetMapping("api/{userId}/incidents")
   public Set<IncidentEntity> getIncidentsByUserId(@PathVariable int userId){
     UserEntity user = new UserEntity();
     Set<IncidentEntity> incidents = null;
@@ -129,7 +129,7 @@ public class UserController {
 
     return incidents; 
 
-  }
+  }*/
 
   /*@GetMapping("csrf")
   public CsrfToken getCsrfToken(CsrfToken token) {
