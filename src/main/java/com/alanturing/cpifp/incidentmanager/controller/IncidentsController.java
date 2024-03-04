@@ -76,10 +76,16 @@ public class IncidentsController {
 
     }
 
-    @PutMapping("/{idInc}")
-    public @ResponseBody String updateIncident(@PathVariable int idInc, @RequestBody IncidentDto entity) {
+    @PutMapping(path ="/{idInc}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
+    public @ResponseBody String updateIncident(@PathVariable int idInc, @RequestPart("incident") IncidentDto incident, 
+    @RequestParam("file") MultipartFile file) {
         try {
-            service.updateIncident(idInc, entity);
+            /*InputStream imageInputStream = file.getInputStream();
+            byte[] imageBytes = imageInputStream.readAllBytes();
+            String contentType = file.getContentType();
+            incident.setFile(imageBytes);
+            incident.setFileType(contentType);*/
+            service.updateIncident(idInc, incident);
             return "Saved";
         } catch (IncidentDoesNotExistsException e) {
             e.printStackTrace();
