@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.context.annotation.Bean;
-/* import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder; */
-//import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,23 +34,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
 
   private final UserService service;
-  //private final PasswordEncoder encoder;
+  private final PasswordEncoder encoder;
 
-  public UserController(UserService service/*, PasswordEncoder encoder*/) {
+  public UserController(UserService service, PasswordEncoder encoder) {
       this.service = service;
-      //this.encoder = encoder;
+      this.encoder = encoder;
   }
 
   @PostMapping("login")
   public boolean login(@RequestBody Credentials credentials) {
-    UserEntity user;
+    UserEntity user = new UserEntity();
     try {
       user = service.getUserByEmail(credentials.getEmail());
-      //return encoder.matches(password, user.getPassword());
-      if(user.getPassword().equals(credentials.getPassword()))
-        return true;
-      else
-        return false;
+      return encoder.matches(credentials.getPassword(), user.getPassword());
     } catch (UserDoesNotExistsException e) {
       e.printStackTrace();
       return false;
@@ -64,8 +61,8 @@ public class UserController {
       String contentType = file.getContentType(); 
       entity.setFile(imageBytes);
       entity.setFileType(contentType);*/
-      //String encodedPassword = this.encoder.encode(entity.getPassword());
-      //entity.setPassword(encodedPassword);
+      String encodedPassword = this.encoder.encode(entity.getPassword());
+      entity.setPassword(encodedPassword);
       service.addNewUser(entity);
       return "Saved";
     } catch (UserAlreadyExistsException e) {
@@ -131,8 +128,8 @@ public class UserController {
 
   }*/
 
-  /*@GetMapping("csrf")
+  @GetMapping("csrf")
   public CsrfToken getCsrfToken(CsrfToken token) {
       return token;
-  }*/
+  }
 }
