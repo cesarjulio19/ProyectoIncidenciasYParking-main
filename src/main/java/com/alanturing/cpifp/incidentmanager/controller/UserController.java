@@ -40,12 +40,14 @@ public class UserController {
       this.service = service;
       this.encoder = encoder;
   }
-
+  // SPRING
   @PostMapping("login")
   public boolean login(@RequestBody Credentials credentials) {
     UserEntity user = new UserEntity();
     try {
       user = service.getUserByEmail(credentials.getEmail());
+      System.out.println(credentials.getPassword());
+      System.out.println(user.getPassword());
       return encoder.matches(credentials.getPassword(), user.getPassword());
     } catch (UserDoesNotExistsException e) {
       e.printStackTrace();
@@ -126,10 +128,10 @@ public class UserController {
 
     return incidents; 
 
-  }*/
+  }
 
   @GetMapping("csrf")
   public CsrfToken getCsrfToken(CsrfToken token) {
       return token;
-  }
+  }*/
 }
